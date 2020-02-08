@@ -1,0 +1,52 @@
+{
+  "GET_REQUEST_OK": "GET OK",
+  "POST_REQUEST_OK": "POST OK",
+  "PUT_REQUEST_OK": "PUT OK",
+  "PATCH_REQUEST_OK": "PATCH OK",
+  "DELETE_REQUEST_OK": "DELETE OK",
+  "REQUEST_GET_FAIL": "GET OK",
+  "POST_REQUEST_FAIL": "POST FAIL",
+  "PUT_REQUEST_FAIL": "PUT OK",
+  "PATCH_REQUEST_FAIL": "PATCH OK",
+  "DELETE_REQUEST_FAIL": "DELETE FAIL",
+  "OBJECT_ID_INVALID": "ID is not ObjectID",
+  "IMAGE_TYPE_INVALID": "Only .png or .jpeg image files are allowed",
+  "DOCUMENT_TYPE_INVALID": "Only PDF documents are allowed",
+  "NAME_LENGTH_INVALID": "Name must contain 6 - 12 characters",
+  "NAME_CHARACTER_INVALID": "Name contains invalid characters",
+  "UNEXPECTED_REPO_ERROR": "Unexpected Repo Error",
+  "UNEXPECTED_SERVICE_ERROR": "Unexpected Service Error",
+  "DUPLICATED": "DUPLICATED",
+  "AUTH_FAIL": "AUTH FAILED",
+  "USER": {
+    "CREATED": "USER CREATED",
+    "EXISTED": "USERNAME not available",
+    "FOUND": "USER found",
+    "CHILD_FOUND": "CHILD List FOUND",
+    "CHILD_LIST_EMPTY": "EMPTY List",
+    "NOT_FOUND": "USER not found",
+    "UPDATE_OK": "USER UPDATE OK",
+    "UPDATE_FAIL": "USER UPDATE FAIL",
+    "DELETE_OK": "USER DELETE OK",
+    "UNEXPECTED_REPO_ERROR": "Unexpected Repo Error",
+    "UNEXPECTED_SERVICE_ERROR": "Unexpected Service Error",
+    "GENERAL_ERROR": "something is not right",
+    "NOT_AUTHORIZED": "PERMISSION RESTRICTED",
+    "SV_ONLY": "CREATE SINHVIEN ONLY"
+  },
+  "DEVICE_TOKEN": {
+    "CREATED": "DEVICE_TOKEN CREATED",
+    "EXISTED": "DEVICE_TOKEN not available",
+    "FOUND": "DEVICE_TOKEN found",
+    "NOT_FOUND": "DEVICE_TOKEN not found",
+    "UPDATE_OK": "DEVICE_TOKEN UPDATE OK",
+    "DELETE_OK": "DEVICE_TOKEN DELETE OK",
+    "UNEXPECTED_REPO_ERROR": "Unexpected DEVICE_TOKEN Repo Error",
+    "UNEXPECTED_SERVICE_ERROR": "Unexpected DEVICE_TOKEN Service Error",
+    "GENERAL_ERROR": "something is not right"
+  },
+  "PHANHOI": {
+    "EXISTED": "PHANHOI exists",
+    "ANSWERED": "This PHANHOI has been answered"
+  }
+}

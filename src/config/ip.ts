@@ -1,0 +1,1 @@
+export const server = process.env.publicIP || "http://localhost:3000";
