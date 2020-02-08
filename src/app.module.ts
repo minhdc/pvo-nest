@@ -18,6 +18,10 @@ import { UsersService } from './users/users.service';
     UsersModule,
     //MongooseModule.forRoot('mongodb+srv://extreme45nm:'+process.env.PASS_MONGO+'@pvo-cluster-0-ucjj2.gcp.mongodb.net/pvo?retryWrites=true&w=majority')],
     TypegooseModule.forRoot(process.env.MONGO_URI,{useNewUrlParser:true}),
+    MongooseModule.forRoot(process.env.MONGO_URI, {
+      useNewUrlParser: true,
+      useUnifiedTopology: true,
+    }),
   ],
   controllers: [AppController],
   providers: [AppService],

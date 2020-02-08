@@ -7,11 +7,15 @@ import { UserController } from './user.controller';
 import { DatabaseModule } from 'src/database/database.module';
 import { UsersService } from './users.service';
 import { TypegooseModule } from 'nestjs-typegoose';
-import { User } from './user';
+import { User } from './user.model';
 
 
 @Module({
-  imports: [TypegooseModule.forFeature([User])],
+  imports: [
+    MongooseModule.forFeature([
+      { name: User.modelName, schema: User.schema },
+    ])
+  ],
   controllers: [UserController],
   providers: [UsersService],
   exports: [UsersService]

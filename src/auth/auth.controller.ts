@@ -1,16 +1,18 @@
 import { Controller, Get, UseGuards, Req, Res } from '@nestjs/common';
 import { AuthGuard } from '@nestjs/passport';
 import { get } from 'http';
-
+import * as j from "jsonwebtoken"
 @Controller('auth')
 export class AuthController {
     @Get('google/callback')
     @UseGuards(AuthGuard('google'))
     public async googleCallback(@Req() req, @Res() res){  
-        const jwt: string = req.user.jwt;
-        console.log(jwt)
-        if (jwt)
-            res.redirect('http://localhost:3000/user/profile/');
+        const jwtValue: string = req.user.jwt;              
+        if (jwtValue){
+            
+                  
+            res.redirect('http://localhost:3000/users/profile');
+        }
         else 
             res.redirect('http://localhost:3000/login/failure');
     }
