@@ -10,6 +10,16 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { DatabaseModule } from './database/database.module';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { UsersService } from './users/users.service';
+import { ConceptModule } from './concept/concept.module';
+import { ExamplesModule } from './nest/examples/examples.module';
+import { ExamplesController } from './examples/examples.controller';
+import { ExamplesService } from './examples/examples.service';
+import { ConceptsModule } from './nest/concepts/concepts.module';
+import { ConceptsController } from './concepts/concepts.controller';
+import { ConceptsService } from './concepts/concepts.service';
+import { ConceptRelationsModule } from './nest/concept-relations/concept-relations.module';
+import { ConceptRelationsController } from './concept-relations/concept-relations.controller';
+import { ConceptRelationsService } from './concept-relations/concept-relations.service';
 
 @Module({
   imports: [ 
@@ -22,8 +32,12 @@ import { UsersService } from './users/users.service';
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }),
+    ConceptModule,
+    ExamplesModule,
+    ConceptsModule,
+    ConceptRelationsModule,
   ],
-  controllers: [AppController],
-  providers: [AppService],
+  controllers: [AppController, ExamplesController, ConceptsController, ConceptRelationsController],
+  providers: [AppService, ExamplesService, ConceptsService, ConceptRelationsService],
 })
 export class AppModule {}
