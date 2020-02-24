@@ -8,8 +8,7 @@ export class AuthController {
     @UseGuards(AuthGuard('google'))
     public async googleCallback(@Req() req, @Res() res){  
         const jwtValue: string = req.user.jwt;              
-        if (jwtValue){
-            
+        if (jwtValue){            
                   
             res.redirect('http://localhost:3000/users/profile');
         }
