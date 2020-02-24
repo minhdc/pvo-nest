@@ -14,8 +14,9 @@ export class UserController {
   @UseGuards(AuthGuard('jwt'))
   async getProfile(@Req() req, @Res() res): Promise<User>{
     console.log("shittttttttttttttttttttt")
-    console.log("useriddddddddd:",req.user.id)
-    return await this.userService.findById(req.user.id);
+    console.log("user: ",req.user.result._id)
+    console.log("useriddddddddd:",req.user.result._id)
+    return res.json(await this.userService.findById(req.user.result._id));
   }
   
   
