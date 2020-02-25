@@ -38,7 +38,8 @@ export class AuthService {
                 .then(result => {
                     
                     if(result){
-                        console.log('user foundddd')
+                        console.log('user found')
+                        console.log('hello, ',result.profile.name.firstName)
                         const payload = {
                             result,                            
                         }                       

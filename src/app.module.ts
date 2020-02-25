@@ -10,7 +10,6 @@ import { MongooseModule } from '@nestjs/mongoose';
 import { DatabaseModule } from './database/database.module';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { UsersService } from './users/users.service';
-import { ConceptModule } from './concept/concept.module';
 import { ExamplesModule } from './nest/examples/examples.module';
 import { ExamplesController } from './examples/examples.controller';
 import { ExamplesService } from './examples/examples.service';
@@ -20,6 +19,7 @@ import { ConceptsService } from './concepts/concepts.service';
 import { ConceptRelationsModule } from './nest/concept-relations/concept-relations.module';
 import { ConceptRelationsController } from './concept-relations/concept-relations.controller';
 import { ConceptRelationsService } from './concept-relations/concept-relations.service';
+
 
 @Module({
   imports: [ 
@@ -31,8 +31,7 @@ import { ConceptRelationsService } from './concept-relations/concept-relations.s
     MongooseModule.forRoot(process.env.MONGO_URI, {
       useNewUrlParser: true,
       useUnifiedTopology: true,
-    }),
-    ConceptModule,
+    }),    
     ExamplesModule,
     ConceptsModule,
     ConceptRelationsModule,
