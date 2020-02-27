@@ -4,22 +4,23 @@ import { User } from "src/users/user.model";
 
 export class Concept extends BaseModel{
 
-  @prop({unique: true,
-  validate: {
-    validator: (v) => {
-      return v.unique
-    },
-    message: "Duplicated Concept"
-  }})
+  @prop({
+    unique: true,
+    required:true,
+    immutable:true,
+    lowercase:true})
   conceptName: string;
 
-  @prop()
+  @prop({required:false})
   definition?: string;
 
-  @prop()
+  @prop({required:false})
   picURL?: string;
 
-  @prop({ref:User})
+  @prop({
+    ref:User,
+    required:true,
+    immutable:true})
   createdBy: Ref<User>;
 }
 

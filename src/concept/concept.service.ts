@@ -1,4 +1,4 @@
-import { Injectable } from '@nestjs/common';
+import { Injectable, HttpStatus, HttpException } from '@nestjs/common';
 import { BaseService } from 'src/shared/base.service';
 import { InjectModel } from '@nestjs/mongoose';
 import { Concept } from './concept.model';
@@ -19,12 +19,48 @@ export class ConceptService extends BaseService<Concept> {
       createdBy: userId
    }
 
-  //  try{
+   try{
+    let result = await this.conceptModel.create(newConcept)
+    return result
+   }catch(err){
+      if(err.code === 11000){
+        throw new HttpException({
+          status:HttpStatus.PRECONDITION_FAILED,
+          error:"Duplicated concept"
+        },412)
+      }else{
+        console.log(err)
+        throw new HttpException({
+          status:HttpStatus.BAD_REQUEST,
+          error:"Something is not right, please try again later"
+        },400)
+      }
+    }
+   
+  }
 
-  //  }catch(err){
+  async deleteConceptById(conceptId: string, userId: string):Promise<any>{
+    try{
+      let result = await this.conceptModel.deleteOne({_id:conceptId,createdBy:userId})
+      return result.deletedCount
+    }catch(err){
+      throw new HttpException({
+        status:HttpStatus.BAD_REQUEST,
+          error:"Something is not right, please try again later"
+      },400)
+    }
+  }
 
-  //  }
-    return await this.conceptModel.create(newConcept)
+  async updateConceptById(conceptId: string, userId: string,concept: Concept):Promise<Concept>{
+    try{
+      let result = await this.conceptModel.updateOne({_id:conceptId,createdBy:userId},concept)
+      return result.deletedCount
+    }catch(err){
+      throw new HttpException({
+        status:HttpStatus.BAD_REQUEST,
+          error:"Something is not right, please try again later"
+      },400)
+    }
   }
 
 }
