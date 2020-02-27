@@ -11,6 +11,7 @@ import { DatabaseModule } from './database/database.module';
 import { TypegooseModule } from 'nestjs-typegoose';
 import { UsersService } from './users/users.service';
 import { ConceptModule } from './concept/concept.module';
+import { ExampleModule } from './example/example.module';
 
 
 
@@ -26,7 +27,8 @@ import { ConceptModule } from './concept/concept.module';
       useNewUrlParser: true,
       useUnifiedTopology: true,
     }),
-    ConceptModule,    
+    ConceptModule,
+    ExampleModule,    
     
   ],
   controllers: [AppController ],
