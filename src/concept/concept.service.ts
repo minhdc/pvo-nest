@@ -54,7 +54,7 @@ export class ConceptService extends BaseService<Concept> {
   async updateConceptById(conceptId: string, userId: string,concept: Concept):Promise<Concept>{
     try{
       let result = await this.conceptModel.updateOne({_id:conceptId,createdBy:userId},concept)
-      return result.deletedCount
+      return result
     }catch(err){
       throw new HttpException({
         status:HttpStatus.BAD_REQUEST,
