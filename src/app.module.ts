@@ -12,6 +12,7 @@ import { TypegooseModule } from 'nestjs-typegoose';
 import { UsersService } from './users/users.service';
 import { ConceptModule } from './concept/concept.module';
 import { ExampleModule } from './example/example.module';
+import { ConceptRelationModule } from './concept-relation/concept-relation.module';
 
 
 
@@ -28,7 +29,8 @@ import { ExampleModule } from './example/example.module';
       useUnifiedTopology: true,
     }),
     ConceptModule,
-    ExampleModule,    
+    ExampleModule,
+    ConceptRelationModule,    
     
   ],
   controllers: [AppController ],
