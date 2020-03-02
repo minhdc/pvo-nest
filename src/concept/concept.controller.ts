@@ -30,13 +30,13 @@ export class ConceptController {
     }
   }
 
-  @Patch("/")
+  @Patch("/:id")
   @UseGuards(AuthGuard("jwt"))
   async updateConcept(@Req() req, @Res() res):Promise<Concept>{
-    let newConcept = await this.conceptServices.updateConceptById(req.body._id,req.user.result.id,req.body)
+    let newConcept = await this.conceptServices.updateConceptById(req.params.id,req.user.result.id,req.body)
     console.log("updated: ",newConcept)
-    if(newConcept.id){      
-      return res.status(HttpStatus.OK).json(newConcept)
+    if(newConcept.nModified == 1){      
+      return res.status(HttpStatus.OK).json({message:"update OK"})
     }else{      
       throw new HttpException({
         status:HttpStatus.INTERNAL_SERVER_ERROR,

@@ -5,7 +5,7 @@ import { EXAMPLE_CONCEPT_RELATION } from "src/config/constants";
 import { User } from "src/users/user.model";
 import { IModelOptions } from "@typegoose/typegoose/lib/types";
 
-@index({fields:{exampleContent:1,relation:1,linkedConcept:1,createdBy:1},options:{unique:true}})
+@index({exampleContent:1,relation:1,linkedConcept:1,createdBy:1},{unique:true})
 export class Example extends BaseModel{
 
     @prop({required:true})

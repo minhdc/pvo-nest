@@ -51,7 +51,7 @@ export class ConceptService extends BaseService<Concept> {
     }
   }
 
-  async updateConceptById(conceptId: string, userId: string,concept: Concept):Promise<Concept>{
+  async updateConceptById(conceptId: string, userId: string,concept: Concept):Promise<any>{
     try{
       let result = await this.conceptModel.updateOne({_id:conceptId,createdBy:userId},concept)
       return result

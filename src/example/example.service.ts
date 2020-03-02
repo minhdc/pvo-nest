@@ -41,11 +41,12 @@ export class ExampleService extends BaseService<Example>{
     }
   }
 
-  async updateExampleById(exampleId: string, userId: string,example: Example):Promise<Example>{
+  async updateExampleById(exampleId: string, userId: string,example: Example):Promise<any>{
     try{
       let result = await this.exampleModel.updateOne({_id:exampleId,createdBy:userId},example)
       return result
     }catch(err){
+      console.log(err)
       throw new HttpException({
         status:HttpStatus.BAD_REQUEST,
           error:"Something is not right, please try again later"

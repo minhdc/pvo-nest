@@ -36,17 +36,17 @@ export class ExampleController {
     }
   }
 
-  @Patch("/")
+  @Patch("/:id")
   @UseGuards(AuthGuard("jwt"))
   async updateExample(@Req() req, @Res() res): Promise<Example> {
     let newExample = await this.exampleService.updateExampleById(
-      req.body._id,
+      req.params.id,
       req.user.result.id,
       req.body
     );
     console.log("updated: ", newExample);
-    if (newExample.id) {
-      return res.status(HttpStatus.OK).json(newExample);
+    if (newExample.nModified == 1) {
+      return res.status(HttpStatus.OK).json({message:"update OK"})
     } else {
       throw new HttpException(
         {
