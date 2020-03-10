@@ -11,7 +11,6 @@ export class ExampleService extends BaseService<Example>{
       super(exampleModel)
     }
 
-
   async addExample(example: Example,userId: string): Promise<Example>{
     let newExample = {
       exampleContent: example.exampleContent,

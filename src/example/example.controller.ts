@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Req, Res, Post, HttpStatus, HttpException, Delete, Patch } from "@nestjs/common";
+import { Controller, Get, UseGuards, Req, Res, Post, HttpStatus, HttpException, Delete, Patch, Param, Query } from "@nestjs/common";
 import { ExampleService } from "./example.service";
 import { AuthGuard } from "@nestjs/passport";
 import { Example } from "./example.model";
@@ -12,6 +12,15 @@ export class ExampleController {
   async getListExample(@Req() req, @Res() res): Promise<Example[]> {
     return res.json(
       await this.exampleService.findAll({ createdBy: req.user.result.id })
+    );
+  }
+
+  @Get("/concept")
+  @UseGuards(AuthGuard("jwt"))
+  async getListExampleByConceptId(@Req() req, @Res() res, @Query() query): Promise<Example[]> {    
+    console.log("query",query.id)
+    return res.json(      
+      await this.exampleService.findAll({linkedConcept:query.id,createdBy:req.user.result.id})
     );
   }
 

@@ -2,8 +2,10 @@ import { Injectable, HttpException, HttpStatus } from '@nestjs/common';
 import { BaseService } from 'src/shared/base.service';
 import { ConceptRelation } from './concept-relation.model';
 import { InjectModel } from '@nestjs/mongoose';
-import { ReturnModelType } from '@typegoose/typegoose';
+import { ReturnModelType, mongoose, Ref } from '@typegoose/typegoose';
 import { Concept } from 'src/concept/concept.model';
+import { MongoId } from 'src/config/constants';
+import { realpathSync } from 'fs';
 
 @Injectable()
 export class ConceptRelationService extends BaseService<ConceptRelation>{
@@ -65,10 +67,18 @@ export class ConceptRelationService extends BaseService<ConceptRelation>{
     }
   }
 
-  async getChildList(conceptRelationId:string, userId: string):Promise<String[]>{
-    let result = await this.conceptRelation.find({parent:conceptRelationId})
+  async getChildList(conceptRelationId:string, userId: string):Promise<Ref<Concept,mongoose.Types.ObjectId>[]>{
+    let result = await this.conceptRelation.find({parent:conceptRelationId,createdBy:userId}).populate('child')
     return result.map(each => {
       return each.child
     })
-    
+  }
+  
+
+  async getParentList(conceptRelationId:string, userId: string):Promise<Ref<Concept,mongoose.Types.ObjectId>[]>{
+    let result = await this.conceptRelation.find({child:conceptRelationId,createdBy:userId}).populate('parent')
+    return result.map(each => {
+      return each.parent
+    })
+  }
   }

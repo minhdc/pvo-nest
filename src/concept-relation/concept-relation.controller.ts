@@ -1,4 +1,4 @@
-import { Controller, Get, UseGuards, Req, Res, Post, HttpStatus, HttpException, Patch, Delete } from '@nestjs/common';
+import { Controller, Get, UseGuards, Req, Res, Post, HttpStatus, HttpException, Patch, Delete, Query } from '@nestjs/common';
 import { ConceptRelationService } from './concept-relation.service';
 import { AuthGuard } from '@nestjs/passport';
 import { ConceptRelation } from './concept-relation.model';
@@ -10,16 +10,29 @@ export class ConceptRelationController {
     }
 
   @Get("/list")
-  @UseGuards(AuthGuard("jwt"))
-  
+  @UseGuards(AuthGuard("jwt"))  
   async getListConcept(@Req() req,@Res() res):Promise<ConceptRelation[]>{
 
     return res.json(await this.conceptRelationService.findAll({createdBy:req.user.result.id}))
   }
 
+  @Get("/parent")
+  @UseGuards(AuthGuard("jwt"))
+  async getParentList(@Req() req,@Res() res, @Query() query):Promise<ConceptRelation[]>{
+
+    return res.json(await this.conceptRelationService.getParentList(query.id,req.user.result.id))
+  }
+
+  @Get("/child")
+  @UseGuards(AuthGuard("jwt"))
+  async getChildList(@Req() req,@Res() res,@Query() query):Promise<ConceptRelation[]>{
+
+    return res.json(await this.conceptRelationService.getChildList(query.id,req.user.result.id))
+  }
+
   @Post("/")
   @UseGuards(AuthGuard("jwt"))
-  async addConcept(@Req() req, @Res() res):Promise<ConceptRelation>{
+  async addConceptRelation(@Req() req, @Res() res):Promise<ConceptRelation>{
     let newConcept = await this.conceptRelationService.addConceptRelation(req.body,req.user.result)
     if(newConcept.id){      
       return res.status(HttpStatus.CREATED).json(newConcept)
@@ -34,7 +47,7 @@ export class ConceptRelationController {
 
   @Patch("/:id")
   @UseGuards(AuthGuard("jwt"))
-  async updateConcept(@Req() req, @Res() res):Promise<any>{
+  async updateConceptRelation(@Req() req, @Res() res):Promise<any>{
     let newConcept = await this.conceptRelationService.updateConceptRelationById(req.params.id,req.user.result.id,req.body)
     console.log("updated: ",newConcept)
     if(newConcept.nModified == 1){      
@@ -49,7 +62,7 @@ export class ConceptRelationController {
 
   @Delete("/")
   @UseGuards(AuthGuard("jwt"))
-  async deleteConcept(@Req() req, @Res() res):Promise<any>{
+  async deleteConceptRelation(@Req() req, @Res() res):Promise<any>{
     console.log("current user: ",req.user.result.id)
     let deletedConcept = await this.conceptRelationService.deleteConceptRelationById(req.body.id,req.user.result.id)
     console.log("deleted: ",deletedConcept)
@@ -62,4 +75,7 @@ export class ConceptRelationController {
       },500)
     }
   }
+
+
+
 }
